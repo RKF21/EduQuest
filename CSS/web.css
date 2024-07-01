@@ -1,0 +1,16 @@
+body {
+    height: 100vh;
+    background-color: #f8f9fa; /* Light grey background */
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.card {
+    margin: 20px auto;
+    max-width: 400px;
+    background: #f8f6f6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

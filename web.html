@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuest</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/web.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        .toggle-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">EduQuest</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0" method="get" action="search.php">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search Courses" aria-label="Search" name="query" required>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="form-container">
+        <form id="registerForm" method="post" action="web.php">
+            <input type="hidden" name="action" value="register">
+            <h2 class="text-center">Register</h2>
+            <div class="form-group">
+                <label for="registerUsername">Username</label>
+                <input type="text" class="form-control" id="registerUsername" name="registerUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">Email</label>
+                <input type="email" class="form-control" id="registerEmail" name="registerEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input type="password" class="form-control" id="registerPassword" name="registerPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+        <form id="loginForm" method="post" action="web.php" style="display:none;">
+            <input type="hidden" name="action" value="login">
+            <h2 class="text-center">Login</h2>
+            <div class="form-group">
+                <label for="loginUsernameEmail">Username/Email</label>
+                <input type="text" class="form-control" id="loginUsernameEmail" name="loginUsernameEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" class="form-control" id="loginPassword" name="loginPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <div class="toggle-link">
+            <a href="#" id="toggleForm">or Login</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById('toggleForm').addEventListener('click', function(e) {
+            e.preventDefault();
+            var registerForm = document.getElementById('registerForm');
+            var loginForm = document.getElementById('loginForm');
+            if (registerForm.style.display === 'none') {
+                registerForm.style.display = 'block';
+                loginForm.style.display = 'none';
+                this.textContent = 'or Login';
+            } else {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                this.textContent = 'or Register';
+            }
+        });
+    </script>
+</body>
+</html>

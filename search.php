@@ -38,7 +38,6 @@ $result = $stmt->get_result();
     <?php include 'templates/footer.php'; ?>
 </body>
 </html>
-hello
 <?php
 $stmt->close();
 $conn->close();

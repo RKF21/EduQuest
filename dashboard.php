@@ -1,11 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: web.html");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,110 +6,194 @@ if (!isset($_SESSION['username'])) {
     <title>EduQuest Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        html, body {
+           height: 100%;
+           margin: 0;
+           background-color: #1c0e3c !important;
+           display: flex;
+           flex-direction: column;
+        }
+
         body {
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #1c0e3c;
+            color: #fff;
         }
-        .navbar-light .navbar-nav .nav-link {
-            color: black;
+
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            padding-top: 0;
+            margin-top: 0;
+            padding-bottom: 100px; 
+            background-color: #1c0e3c;
+            text-align: center; 
         }
+
+        .navbar {
+            margin-bottom: 0px;
+            background-color: #2d1a54; 
+            border-bottom: 2px solid #0056b3;
+        }
+
+        .navbar .navbar-brand {
+            color: #fdfefe !important;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffdd57;
+        }
+
+        .navbar-toggler {
+            border-color: #fff;
+        }
+
+        h1 {
+            color: #007bff;
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .container p {
+            color: #bbb;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color:  #007bff;
+            text-align: center;
+        }
+
         .card {
-            background-color: #1e1e1e;
+            background-color: #495057;
+            border: none;
+            margin: 10px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #472097 !important;
             border: none;
         }
-        .card-title, .card-text {
+
+        .footer {
+            background-color: #2d1a54;
             color: #ffffff;
+            text-align: center;
+            justify-content:center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 12px;
+            height:3vh;
         }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+        .card-text{
+            color:black !important;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">EduQuest</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="coursesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Courses
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="coursesDropdown">
-                        <a class="dropdown-item" href="#">Course 1</a>
-                        <a class="dropdown-item" href="#">Course 2</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="classDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Class
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="classDropdown">
-                        <a class="dropdown-item" href="#">Class 1</a>
-                        <a class="dropdown-item" href="#">Class 2</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.php">Logout</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search Courses" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-    <div class="container mt-5">
+
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: web.html");
+    exit();
+}
+
+include 'templates/header.php'; 
+?>
+     
+    <div class="container">
+        <br><br>
         <h1>Welcome to EduQuest</h1>
+        <p>
+            EduQuest is a platform designed to empower students with the skills and knowledge they need 
+            to excel in the modern world. Explore our diverse range of courses and start your learning 
+            journey today!
+        </p>
+        <br><br><br>
         <h2>Courses</h2>
+        <br>
         <div class="row">
             <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Python Tutorials - 100 Days of Code</h5>
-                        <p class="card-text">Python is one of the most demanded programming languages in the job market. Surprisingly, it is equally easy to learn and master Python. Let's commit our 100 days of code to python!</p>
-                        <a href="#" class="btn btn-primary">Start Watching</a>
+                        <h5 class="card-title">Python Tutorials</h5>
+                        <p class="card-text">Python is one of the most demanded programming languages in the job market.Let's start!</p>
+                        <a href="courses/python.php" class="btn btn-primary">Start Learning</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Ultimate JavaScript Course</h5>
-                        <p class="card-text">This latest JavaScript course comes with a premium curriculum that covers everything from basics to advance. On top of that, you will get my handwritten notes of JS for completely free. What are you waiting for? Just Enroll Buddy</p>
-                        <a href="#" class="btn btn-primary">Start Watching</a>
+                        <p class="card-text">This JavaScript course covers everything from basics to advanced. Enroll now!</p>
+                        <a href="courses/javascript.php" class="btn btn-primary">Start Learning</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Master React Step by Step</h5>
-                        <p class="card-text">React is a free and open-source front-end JavaScript library. This series will cover React from starting to the end. We will learn react from the ground up!</p>
-                        <a href="#" class="btn btn-primary">Start Watching</a>
+                        <h5 class="card-title">Master Bootstrap Step by Step</h5>
+                        <p class="card-text">Learn Bootstrap from scratch in this comprehensive course. Start learning today!</p>
+                        <a href="courses/bootstrap.php" class="btn btn-primary">Start Learning</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <h2>SSC and HSC Courses</h2>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">SSC Preparation Course</h5>
+                        <p class="card-text">A comprehensive course to prepare students for the Secondary School Certificate (SSC) examination.</p>
+                        <a href="class9-10.php" class="btn btn-primary">Start Learning</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">HSC Preparation Course</h5>
+                        <p class="card-text">Prepare for the Higher Secondary Certificate (HSC) exam with in-depth resources and study materials.</p>
+                        <a href="class11-12.php" class="btn btn-primary">Start Learning</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<footer class="footer">
+    <div>
+        <p>&copy; 2024 EduQuest. All rights reserved.</p>
+    </div>
+</footer>
+
 </body>
 </html>

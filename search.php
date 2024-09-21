@@ -1,44 +1,36 @@
 <?php
-require 'connection/config.php';
+if (isset($_GET['query'])) {
+    $query = strtolower(trim($_GET['query']));
 
-$query = $_GET['query'];
-$sql = "SELECT * FROM courses WHERE course_name LIKE ? OR description LIKE ?";
-$stmt = $conn->prepare($sql);
-$searchQuery = "%" . $query . "%";
-$stmt->bind_param("ss", $searchQuery, $searchQuery);
-$stmt->execute();
-$result = $stmt->get_result();
-?>
+    
+    $courses = [
+        'html' => 'html',
+        'css' => 'css',
+        'javascript' => 'javascript',
+        'bootstrap' => 'bootstrap',
+        'python' => 'python',
+        'php' => 'php',
+        'class 9-10' => 'class9-10.php',
+        'class 11-12' => 'class11-12.php',
+    ];
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <?php include 'templates/header.php'; ?>
-    <div class="container mt-4">
-        <h2>Search Results for "<?php echo htmlspecialchars($query); ?>"</h2>
-        <?php if ($result->num_rows > 0): ?>
-            <ul class="list-group">
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <li class="list-group-item">
-                        <h5><?php echo htmlspecialchars($row['course_name']); ?></h5>
-                        <p><?php echo htmlspecialchars($row['description']); ?></p>
-                    </li>
-                <?php endwhile; ?>
-            </ul>
-        <?php else: ?>
-            <p>No courses found matching your query.</p>
-        <?php endif; ?>
-    </div>
-    <?php include 'templates/footer.php'; ?>
-</body>
-</html>
-<?php
-$stmt->close();
-$conn->close();
+    
+    if (array_key_exists($query, $courses)) {
+        $coursePage = $courses[$query];
+        if (strpos($coursePage, '.php') !== false) {
+            header("Location: $coursePage");
+        } else {
+            header("Location: course.php?course=$coursePage");
+        }
+        exit();
+    } else {
+        
+        header("Location: dashboard.php");
+        exit();
+    }
+} else {
+    
+    header("Location: dashboard.php");
+    exit();
+}
 ?>

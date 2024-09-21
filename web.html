@@ -5,102 +5,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduQuest</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/web.css">
+    <link rel="stylesheet" href="CSS/web.css">
     <style>
-        body {
-            background-color: #f8f9fa;
+        html, body {
+            height: 100%;
+            margin: 0;
+            width:100%;
+            overflow: hidden;
         }
-        .navbar-brand {
-            font-weight: bold;
+
+        .container-fluid {
+            height: calc(100vh - 4vh); 
         }
-        .form-container {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
-        .toggle-link {
+        
+        .left-side {
+            flex: 1;
+            background-image: url('Images/eduquest_image.png');
+            background-size: cover;
+            background-position: center;
             text-align: center;
-            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-side {
+            flex: 1;
+            background-color: #f9f9f9;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        form input {
+            max-width: 500px;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #0f0909;
+            border-radius: 4px;
+        }
+
+        button {
+            max-width: 500px;
+            width: 100%;
+            padding: 12px;
+            background-color: #351d86;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0d0637;
+        }
+
+        .toggle-link {
+            margin-bottom: 15px;
+        }
+        .toggle-link a {
+            color: #0056b3;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .toggle-link a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #2d1a54;
+            color: #ffffff;
+            text-align: center;
+            justify-content:center;
+            font-size: 12px;
+            padding: 10px 0;
+            height: 3vh;
+            width: 100%;
+            position: relative;
+            bottom: 0;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">EduQuest</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <form class="form-inline my-2 my-lg-0" method="get" action="search.php">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search Courses" aria-label="Search" name="query" required>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <div class="container-fluid d-flex align-items-center">
+        <div class="row w-100 h-100">
+            <div class="col-md-6 left-side d-flex justify-content-center align-items-center">
+            </div>
+            <div class="col-md-6 right-side d-flex justify-content-center align-items-center">
+                <div>
+                    <div class="toggle-link">
+                        <a href="#" id="toggleForm">Login</a> | <a href="#" id="toggleFormRegister">Sign Up</a>
+                    </div>
+
+                    <form id="registerForm" method="post" action="web.php" style="display:none;">
+                        <input type="hidden" name="action" value="register">
+                        <h2 class="text-center">Register</h2>
+                        <input type="text" id="registerUsername" name="registerUsername" placeholder="Username" required>
+                        <input type="email" id="registerEmail" name="registerEmail" placeholder="Email" required>
+                        <input type="password" id="registerPassword" name="registerPassword" placeholder="Password" required>
+                        <button type="submit">Sign Up</button>
                     </form>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="form-container">
-        <form id="registerForm" method="post" action="web.php">
-            <input type="hidden" name="action" value="register">
-            <h2 class="text-center">Register</h2>
-            <div class="form-group">
-                <label for="registerUsername">Username</label>
-                <input type="text" class="form-control" id="registerUsername" name="registerUsername" required>
+
+                    <form id="loginForm" method="post" action="web.php">
+                        <input type="hidden" name="action" value="login">
+                        <h2 class="text-center">Login</h2>
+                        <input type="text" id="loginUsernameEmail" name="loginUsernameEmail" placeholder="Username/Email" required>
+                        <input type="password" id="loginPassword" name="loginPassword" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="registerEmail">Email</label>
-                <input type="email" class="form-control" id="registerEmail" name="registerEmail" required>
-            </div>
-            <div class="form-group">
-                <label for="registerPassword">Password</label>
-                <input type="password" class="form-control" id="registerPassword" name="registerPassword" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
-        </form>
-        <form id="loginForm" method="post" action="web.php" style="display:none;">
-            <input type="hidden" name="action" value="login">
-            <h2 class="text-center">Login</h2>
-            <div class="form-group">
-                <label for="loginUsernameEmail">Username/Email</label>
-                <input type="text" class="form-control" id="loginUsernameEmail" name="loginUsernameEmail" required>
-            </div>
-            <div class="form-group">
-                <label for="loginPassword">Password</label>
-                <input type="password" class="form-control" id="loginPassword" name="loginPassword" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
-        </form>
-        <div class="toggle-link">
-            <a href="#" id="toggleForm">or Login</a>
         </div>
     </div>
+    
+    <footer>
+        <div>
+            <p>&copy; 2024 EduQuest. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
         document.getElementById('toggleForm').addEventListener('click', function(e) {
             e.preventDefault();
-            var registerForm = document.getElementById('registerForm');
-            var loginForm = document.getElementById('loginForm');
-            if (registerForm.style.display === 'none') {
-                registerForm.style.display = 'block';
-                loginForm.style.display = 'none';
-                this.textContent = 'or Login';
-            } else {
-                registerForm.style.display = 'none';
-                loginForm.style.display = 'block';
-                this.textContent = 'or Register';
-            }
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+        });
+
+        document.getElementById('toggleFormRegister').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
         });
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
